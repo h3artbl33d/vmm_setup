@@ -27,7 +27,7 @@ vmm:
 	@mkdir -p /VMs/sets/snapshots/amd64/
 	@mkdir -p /VMs/linux
 	@cd /VMs/linux && ftp -V https://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso
-	@cd /VMs/sets/snapshots/amd64/ && ftp -V ftp3.usa.openbsd.org/pub/OpenBSD/snapshots/packages/amd64/bsd{.mp,.rd}
+	@cd /VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd}
 	@echo ""
 	@echo "[+] Enabling vmd & setting dhcpd..."
 	@echo ""
