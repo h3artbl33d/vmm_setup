@@ -16,9 +16,9 @@ ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/sysctl.conf
 echo ""
 echo "[+] Installing files..."
 echo ""
-install -m 0640 -g wheel -o root /tmp/hostname.vether0 /etc
-install -m 0600 -g wheel -o root /tmp/{pf,sysctl,dhcpd,vm}.conf /etc
-rm /tmp/hostname.vether0 /tmp/*.conf
+install -m 0640 -g wheel -o root /tmp/hostname.vether0 /etc && \
+install -m 0600 -g wheel -o root /tmp/{pf,sysctl,dhcpd,vm}.conf /etc && \
+rm /tmp/hostname.vether0 /tmp/*.conf >/dev/null
 echo ""
 echo "[+] Downloading OpenBSD kernels and Alpine Linux iso..."
 echo ""
@@ -26,7 +26,6 @@ mkdir -p /VMs/sets/snapshots/amd64/
 mkdir -p /VMs/linux
 cd /VMs/linux && ftp -V https://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso
 cd /VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd}
-rm /tmp/hostname.vether0 /tmp/*.conf
 echo ""
 echo "[+] Enabling vmd & setting dhcpd..."
 echo ""
