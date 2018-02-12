@@ -2,6 +2,11 @@
 
 The idea of this repo is to setup an example vmm(4) envorioment to run VMs over OpenBSD, with OpenBSD.
 
+For debian on vmm(4) you can also see @vext01:
+
+https://github.com/vext01/recipes/blob/master/recipes/debian9_inside_vmm.md
+
+
 # WARNING: This will override your files if exists
 
 ## hostname.vether0
