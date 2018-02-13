@@ -1,6 +1,6 @@
 # OpenBSD vmm(4) example setup
 
-The idea of this repo is to setup an example vmm(4) envorioment to run VMs over OpenBSD, with OpenBSD.
+The idea of this repo is to setup an example vmm(4) environment to run VMs over OpenBSD, with OpenBSD.
 
 For debian on vmm(4) you can also see @vext01:
 
