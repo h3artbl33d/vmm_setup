@@ -11,6 +11,7 @@ vmm:
 	@echo ""
 	@cd /tmp
 	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/hostname.vether0
+    @ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/hostname.bridge0
 	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/dhcpd.conf
 	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/pf.conf
 	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/vm.conf
@@ -27,7 +28,7 @@ vmm:
 	@mkdir -p /VMs/sets/snapshots/amd64/
 	@mkdir -p /VMs/linux
 	@cd /VMs/linux && ftp -V https://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso
-	@cd /VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd}
+	@cd /VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd} && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/install62.fs
 	@echo ""
 	@echo "[+] Enabling vmd & setting dhcpd..."
 	@echo ""
