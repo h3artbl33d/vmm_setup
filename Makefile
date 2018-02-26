@@ -19,7 +19,8 @@ vmm:
 	@echo ""
 	@echo "[+] Installing files..."
 	@echo ""
-	@install -m 0640 -g wheel -o root /tmp/hostname.{vether0, bridge0} /etc
+	@install -m 0640 -g wheel -o root /tmp/hostname.vether0 /etc
+	@install -m 0640 -g wheel -o root /tmp/hostname.bridge0 /etc
 	@install -m 0600 -g wheel -o root /tmp/{pf,sysctl,dhcpd,vm}.conf /etc
 	@rm /tmp/hostname.* /tmp/*.conf
 	@echo ""
