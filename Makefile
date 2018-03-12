@@ -7,15 +7,15 @@
 
 vmm:
 	@echo ""
-	@echo "[+] Downloading files from https://github.com/teatkin/vmm_setup"
+	@echo "[+] Downloading files from https://github.com/gonzalo-/vmm_setup"
 	@echo ""
 	@cd /tmp
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/hostname.vether0
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/hostname.bridge0
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/dhcpd.conf
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/pf.conf
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/vm.conf
-	@ftp -V https://raw.githubusercontent.com/teatkin/vmm_setup/master/sysctl.conf
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/hostname.vether0
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/hostname.bridge0
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/dhcpd.conf
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/pf.conf
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/vm.conf
+	@ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/sysctl.conf
 	@echo ""
 	@echo "[+] Installing files..."
 	@echo ""
@@ -26,12 +26,13 @@ vmm:
 	@echo ""
 	@echo "[+] Downloading OpenBSD kernels and Alpine Linux iso..."
 	@echo ""
-	@mkdir -p /home/VMs/sets/snapshots/amd64/
-	@mkdir -p /home/VMs/linux
-	@cd /home/VMs/linux && ftp -V https://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso
-	@cd /home/VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd} 
+	@mkdir -p /VMs/sets/snapshots/amd64/
+	@mkdir -p /VMs/linux
+	@cd /VMs/linux && ftp -V https://nl.alpinelinux.org/alpine/v3.6/releases/x86_64/alpine-virt-3.6.0-x86_64.iso
+	@cd /VMs/sets/snapshots/amd64/ && ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd{.mp,.rd} 
 	@ftp -V https://fastly.cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/install62.fs
-	@vmctl create "/home/VMs/Alpine_Linux.img" -s 25G && vmctl create "/home/VMs/OpenBSD_Ports.img" -s 25G
+	@echo "To create the disks run something like this: "
+	@echo 'vmctl "/VMs/OpenBSD_Ports.img" -s 25G'
 	@echo ""
 	@echo "[+] Enabling vmd & setting dhcpd..."
 	@echo ""
