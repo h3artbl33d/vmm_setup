@@ -17,6 +17,7 @@ You can set your VMs network here, for now is 10.10.10.0/24 and runs the DHCP se
 
 This file bridges your network so the VMs can talk to vether0 to get a DHCP address and be forwarded to the internet.
 In the new syntax, ```add vether0``` has been removed and replaced with ```interface bridge0``` so now the network looks like this:
+
 ``` vm ---> bridge0 ---> vether0 ---> internet```
 
 ## pf.conf
