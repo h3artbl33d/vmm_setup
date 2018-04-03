@@ -1,4 +1,4 @@
-# OpenBSD vmm(4) example setup
+# OpenBSD vmm(4) 
 
 The idea of this repo is to setup an example vmm(4) environment to run VMs over OpenBSD, with OpenBSD.
 
@@ -9,45 +9,46 @@ https://github.com/vext01/recipes/blob/master/recipes/debian9_inside_vmm.md
 
 # WARNING: This will override your files if exists
 
-## hostname.vether0
+### hostname.vether0
 
-You can set your VMs network here, for now is 10.10.10.0/24 and runs the DHCP server on 10.10.10.255
+This file allows configuration of the VM network. The installed default has it's own subnet, 10.10.10.0/24. The DHCP server runs at 10.10.10.254 and is configured via dhcpd.conf.
 
-## hostname.bridge0
+### hostname.bridge0
 
-This file bridges your network so the VMs can talk to vether0 to get a DHCP address and be forwarded to the internet.
-In the new syntax, ```add vether0``` has been removed and replaced with ```interface bridge0``` so now the network looks like this:
+This file contains the bridge configuration of your network, allowing VMs talking to vether0 to get a DHCP address and be forwarded to the internet. In the new syntax, ```add vether0``` has been removed and replaced with ```interface bridge0``` so now the network looks like this:
 
 ``` vm ---> bridge0 ---> vether0 ---> internet```
 
-## pf.conf
+### pf.conf
 
 A typical pf.conf, $ext_if are our inet interfaces, and $int_if are our 'internal', in this case, the
 internals interfaces are the ones connected to VMs, in this case vether0 and tapX. You need to edit this
 according to your machine.
 
-## sysctl.conf
+### sysctl.conf
 
-Now our machine is our VMs GW, so we need to permite the ip forwarding.
+Used for miscellaneous system and kernel settings, sysctl.conf is used to allow traffic forwarding, from and to the external interface and your VM network.
 
-## dhcpd.conf
+### dhcpd.conf
 
-A regular dhcpd setup, for our VMs, setting our network and nameservers.
+A quick 'n dirty DHCP server configuration, setting the VM network and nameserver (currently, Quad9 is configured in the default - personally I don't like OpenDNS/Google DNS/CloudFlare DNS.
 
-## vm.conf
+### vm.conf
+
+This is the main VMM configuration file. It needs to be edited, according to your particular setup and whatever you want to achieve. The default setting does have all VMs disabled. It can be used as a clear example to _brew_ your own. 
 
 Our VMs file, has comments, this is the main file, you need to edit this to your taste.
 
-## Makefile usage
+### Makefile usage
 
 Assuming you have comp6X.tgz installed.
 
 ```
 # cd /tmp
-# ftp -V https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/Makefile
+# ftp -V https://raw.githubusercontent.com/h3artbl33d/vmm_setup/master/Makefile
 # make vmm
 
-[+] Downloading files from https://github.com/gonzalo-/vmm_setup
+[+] Downloading files from https://github.com/h3artbl33d/vmm_setup
 
 hostname.vether0	100% |*********************************************************|    39       00:00
 dhcpd.conf		100% |*********************************************************|   420       00:00
@@ -64,16 +65,16 @@ sysctl.conf		100% |*********************************************************|   
 # reboot
 ```
 
-## vmm.sh usage
+### vmm.sh usage
 
 ```
 # cd /tmp
-# ftp -o - https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/vmm.sh | sh -
+# ftp -o - https://raw.githubusercontent.com/h3artbl33d/vmm_setup/master/vmm.sh | sh -
 Trying 151.101.24.133...
-Requesting https://raw.githubusercontent.com/gonzalo-/vmm_setup/master/vmm.sh
+Requesting https://raw.githubusercontent.com/h3artbl33d/vmm_setup/master/vmm.sh
 1329 bytes received in 0.00 seconds (6.12 MB/s)
 
-[+] Downloading files from https://github.com/gonzalo-/vmm_setup
+[+] Downloading files from https://github.com/h3artbl33d/vmm_setup
 
 hostname.vether0	100% |*********************************************************|    39       00:00
 dhcpd.conf		100% |*********************************************************|   420       00:00
@@ -90,7 +91,7 @@ sysctl.conf		100% |*********************************************************|   
 # reboot
 ```
 
-# vmm(4) running
+### vmm(4) running
 ```
 $ vmctl status
    ID   PID VCPUS  MAXMEM  CURMEM     TTY        OWNER NAME
@@ -111,10 +112,10 @@ login:
 $ doas vmctl console 3
 
 
-Welcome to Alpine Linux 3.6
-Kernel 4.9.32-0-virthardened on an x86_64 (/dev/ttyS0)
+Welcome to Alpine Linux 3.7
+Kernel 4.9.65-1-virthardened on an x86_64 (/dev/ttyS0)
 
-sonarr login: gonzalo
+box login: h3artbl33d
 Password:
 Welcome to Alpine!
 
@@ -128,3 +129,6 @@ You may change this message by editing /etc/motd.
 
 alpine:~$
 ```
+### Credits
+
+This repository and it's code was forked from [Gonzalo](https://github.com/gonzalo-). Much thanks and credits to him/her.
